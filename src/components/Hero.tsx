@@ -1,15 +1,53 @@
 import { Users, Award, Building2 } from 'lucide-react';
 
+// Team members with professional avatar photos using DiceBear API
+// These generate consistent, professional-looking avatars based on names
 const teamMembers = [
-  { name: 'Manuel Kunz', role: 'Geschäftsführer' },
-  { name: 'Till Püttmann', role: 'Geschäftsführer' },
-  { name: 'Jan Dinner', role: 'Gründer' },
-  { name: 'Uta Heinrich', role: 'Prokuristin' },
-  { name: 'Mico Kikic', role: 'Key Account Manager' },
-  { name: 'Claudia Fromm', role: 'Innendienst' },
-  { name: 'Timo Seibert', role: 'Team' },
-  { name: 'Denno Probst', role: 'Team' },
-  { name: 'Michel Kornprobst', role: 'Team' },
+  { 
+    name: 'Manuel Kunz', 
+    role: 'Geschäftsführer',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=ManuelKunz&backgroundColor=e5e7eb&hairColor=2d2d2d&clothing=blazerAndShirt'
+  },
+  { 
+    name: 'Till Püttmann', 
+    role: 'Geschäftsführer',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=TillPuettmann&backgroundColor=d1d5db&hairColor=4a4a4a&clothing=blazerAndShirt'
+  },
+  { 
+    name: 'Jan Dinner', 
+    role: 'Gründer',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=JanDinner&backgroundColor=e5e7eb&hairColor=1a1a1a&clothing=collarAndSweater'
+  },
+  { 
+    name: 'Uta Heinrich', 
+    role: 'Prokuristin',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=UtaHeinrich&backgroundColor=f3e8ff&hairColor=6b4423&clothing=blazerAndShirt'
+  },
+  { 
+    name: 'Mico Kikic', 
+    role: 'Key Account Manager',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=MicoKikic&backgroundColor=dbeafe&hairColor=2d2d2d&clothing=blazerAndShirt'
+  },
+  { 
+    name: 'Claudia Fromm', 
+    role: 'Innendienst',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=ClaudiaFromm&backgroundColor=fce7f3&hairColor=8b4513&clothing=collarAndSweater'
+  },
+  { 
+    name: 'Timo Seibert', 
+    role: 'Team',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=TimoSeibert&backgroundColor=e0e7ff&hairColor=4a4a4a&clothing=blazerAndShirt'
+  },
+  { 
+    name: 'Denno Probst', 
+    role: 'Team',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=DennoProbst&backgroundColor=ecfdf5&hairColor=2d2d2d&clothing=collarAndSweater'
+  },
+  { 
+    name: 'Michel Kornprobst', 
+    role: 'Team',
+    photo: 'https://api.dicebear.com/7.x/micah/svg?seed=MichelKornprobst&backgroundColor=fef3c7&hairColor=5a5a5a&clothing=blazerAndShirt'
+  },
 ];
 
 export function Hero() {
@@ -33,8 +71,22 @@ export function Hero() {
           <div className="team-grid">
             {teamMembers.map((member, index) => (
               <div key={index} className="team-member">
-                <div className="team-member-avatar">
-                  <Users size={32} />
+                <div className="team-member-photo">
+                  <img 
+                    src={member.photo} 
+                    alt={member.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      // Fallback to icon if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                  <div className="team-member-photo-fallback" style={{ display: 'none' }}>
+                    <Users size={32} />
+                  </div>
                 </div>
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>
