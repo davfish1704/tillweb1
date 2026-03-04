@@ -5,6 +5,7 @@ import { WhyInsuro } from './components/WhyInsuro'
 import { Process } from './components/Process'
 import { Criteria } from './components/Criteria'
 import { Footer } from './components/Footer'
+import { WhatsAppButton } from './components/WhatsAppButton'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Criteria />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   )
 }
